@@ -169,7 +169,7 @@ const HeroForm = () => {
               <div className="flex items-start gap-3">
                 <Checkbox
                   id="consentimento"
-                  onCheckedChange={(checked) => setValue("consentimento", checked === true ? true : undefined as any)}
+                  onCheckedChange={(checked) => setValue("consentimento", checked === true)}
                   className="mt-1"
                 />
                 <Label htmlFor="consentimento" className="text-xs leading-relaxed text-foreground">
