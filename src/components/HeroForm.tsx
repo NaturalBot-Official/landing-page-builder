@@ -32,6 +32,7 @@ const HeroForm = () => {
     handleSubmit,
     setValue,
     watch,
+    setError,
     formState: { errors },
     reset,
   } = useForm<FormData>({
@@ -42,8 +43,8 @@ const HeroForm = () => {
       nome: "",
       email: "",
       celular: "",
-      captcha: "" as string,
-      consentimento: undefined,
+      captcha: "",
+      consentimento: false,
     },
   });
 
