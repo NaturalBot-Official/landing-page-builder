@@ -42,7 +42,7 @@ const HeroForm = () => {
       nome: "",
       email: "",
       celular: "",
-      captcha: "",
+      captcha: "" as string,
       consentimento: undefined,
     },
   });
