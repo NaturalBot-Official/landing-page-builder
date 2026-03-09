@@ -18,8 +18,8 @@ const formSchema = z.object({
   nome: z.string().trim().min(1, "Nome é obrigatório").max(100),
   email: z.string().trim().email("Email inválido").max(255),
   celular: z.string().trim().min(10, "Celular inválido").max(20),
-  captcha: z.string().refine((val) => val === "11", "Resposta incorreta"),
-  consentimento: z.literal(true, { errorMap: () => ({ message: "Você precisa aceitar para continuar" }) }),
+  captcha: z.string().min(1, "Resposta obrigatória"),
+  consentimento: z.boolean(),
 });
 
 type FormData = z.infer<typeof formSchema>;
