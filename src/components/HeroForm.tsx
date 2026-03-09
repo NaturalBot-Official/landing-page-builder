@@ -48,6 +48,14 @@ const HeroForm = () => {
   });
 
   const onSubmit = async (data: FormData) => {
+    if (data.captcha !== "11") {
+      setError("captcha", { message: "Resposta incorreta" });
+      return;
+    }
+    if (!data.consentimento) {
+      setError("consentimento", { message: "Você precisa aceitar para continuar" });
+      return;
+    }
     setIsSubmitting(true);
     try {
       const { error } = await supabase.functions.invoke("send-lead-email", {
