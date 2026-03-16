@@ -97,10 +97,10 @@ const HeroForm = ({
         {/* Left side */}
         <div className="text-center md:text-left">
           <h1 className="mb-6 text-3xl font-extrabold leading-tight text-white md:text-4xl lg:text-5xl" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Preencha o formulário, simule o seu pedido em uma pizzaria e veja como é ser atendido pelo nosso Copiloto de Vendas
+            {heroTitle}
           </h1>
           <p className="text-lg font-medium text-white/90 md:text-xl">
-            Descubra porque somos a nova geração de chatbot
+            {heroSubtitle}
           </p>
         </div>
 
