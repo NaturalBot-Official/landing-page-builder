@@ -27,6 +27,8 @@ type FormData = z.infer<typeof formSchema>;
 interface HeroFormProps {
   heroTitle?: string;
   heroSubtitle?: string;
+  gradientStyle?: string;
+  cardColor?: string;
 }
 
 const HeroForm = ({
