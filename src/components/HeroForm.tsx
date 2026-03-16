@@ -24,7 +24,15 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const HeroForm = () => {
+interface HeroFormProps {
+  heroTitle?: string;
+  heroSubtitle?: string;
+}
+
+const HeroForm = ({
+  heroTitle = "Preencha o formulário, simule o seu pedido em uma pizzaria e veja como é ser atendido pelo nosso Copiloto de Vendas",
+  heroSubtitle = "Descubra porque somos a nova geração de chatbot",
+}: HeroFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
