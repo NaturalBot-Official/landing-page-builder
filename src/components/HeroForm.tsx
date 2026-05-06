@@ -10,7 +10,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+
+const WEBHOOK_URL =
+  "https://backend.fenil.com.br/webhook-forms/receive/b1e48cc898f8ea5eca135c717c1145582d46fa28caae675772fcb4c27909dc43";
 
 const formSchema = z.object({
   restaurante: z.string().min(1, "Selecione uma opção"),
@@ -69,16 +71,17 @@ const HeroForm = ({
     }
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.functions.invoke("send-lead-email", {
-        body: {
+      await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           nome: data.nome,
           email: data.email,
-          celular: data.celular,
-          restaurante: data.restaurante,
-          delivery: data.delivery,
-        },
+          celular: "55" + data.celular.replace(/\D/g, ""),
+          gerencia_restaurante: data.restaurante === "sim" ? "Sim" : "Não",
+          trabalha_delivery: data.delivery === "sim" ? "Sim" : "Não",
+        }),
       });
-      if (error) throw error;
       toast.success("Formulário enviado com sucesso! Entraremos em contato.");
       reset();
     } catch {
