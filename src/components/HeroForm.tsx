@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,6 +39,7 @@ const HeroForm = ({
   heroSubtitle = "Descubra porque somos a nova geração de chatbot",
 }: HeroFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const {
     register,
@@ -83,7 +85,7 @@ const HeroForm = ({
         }),
       });
       toast.success("Formulário enviado com sucesso! Entraremos em contato.");
-      reset();
+      setSubmitted(true);
     } catch {
       toast.error("Erro ao enviar. Tente novamente.");
     } finally {
@@ -112,6 +114,17 @@ const HeroForm = ({
         {/* Right side - Form card */}
         <Card className="border-0 shadow-2xl" style={{ background: "hsl(38, 95%, 55%)" }}>
           <CardContent className="p-6 md:p-8">
+            {submitted ? (
+              <div className="rounded-2xl bg-white p-10 text-center">
+                <CheckCircle2 className="mx-auto mb-4 size-14 text-purple-600" />
+                <h3 className="mb-2 text-2xl font-extrabold text-gray-900">
+                  Obrigado!
+                </h3>
+                <p className="text-gray-500">
+                  Recebemos seu cadastro. Em breve nosso time entrará em contato para liberar seu teste do Copiloto.
+                </p>
+              </div>
+            ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               {/* Select restaurante */}
               <div className="space-y-2">
@@ -202,6 +215,7 @@ const HeroForm = ({
                 {isSubmitting ? "ENVIANDO..." : "TESTAR COPILOTO"}
               </Button>
             </form>
+            )}
           </CardContent>
         </Card>
       </div>
